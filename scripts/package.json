@@ -1,0 +1,45 @@
+{
+  "name": "solana-auction",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "compile": "tsc -p ./tsconfig.json",
+    "setup-validator": "solana-test-validator -r --mint E2F3fsS1HpsLb2VpEgsA5ztfo83CWFWW4jWpC6FvJ6qR --bpf-program 5bkMHSLS77FtUTEYTcmKw6Gouf6HVV1dAYDwTgnMJP2y",
+    "setup": "npm run compile && node build/setup.js",
+    "exhibitor": "npm run compile && node build/exhibitor.js",
+    "cancel": "npm run compile && node build/cancel.js",
+    "bidder1": "npm run compile && BIDDER=1 node build/bidder.js",
+    "bidder2": "npm run compile && BIDDER=2 node build/bidder.js",
+    "receive1": "npm run compile && BIDDER=1 node build/close.js",
+    "receive2": "npm run compile && BIDDER=2 node build/close.js",
+    "payer-tokens": "spl-token accounts --url http://localhost:8899 --verbose --owner `cat ./keys/id_pub.json | tr -d '\"'`",
+    "exhibitor-tokens": "spl-token accounts --url http://localhost:8899 --verbose --owner `cat ./keys/exhibitor_pub.json | tr -d '\"'`",
+    "bidder1-tokens": "spl-token accounts --url http://localhost:8899 --verbose --owner `cat ./keys/bidder1_pub.json | tr -d '\"'`",
+    "bidder2-tokens": "spl-token accounts --url http://localhost:8899 --verbose --owner `cat ./keys/bidder2_pub.json | tr -d '\"'`",
+    "pda-tokens": "spl-token accounts --url http://localhost:8899 --verbose --owner `cat ./keys/pda_pub.json | tr -d '\"'`",
+    "payer-sol": "solana account --url http://localhost:8899 `cat ./keys/id_pub.json | tr -d '\"'`",
+    "exhibitor-sol": "solana account --url http://localhost:8899 `cat ./keys/exhibitor_pub.json | tr -d '\"'`",
+    "bidder1-sol": "solana account --url http://localhost:8899 `cat ./keys/bidder1_pub.json | tr -d '\"'`",
+    "bidder2-sol": "solana account --url http://localhost:8899 `cat ./keys/bidder2_pub.json | tr -d '\"'`",
+    "lint:fix": "npm run lint:js -- --fix",
+    "lint:js": "eslint -c \"./.eslintrc\" \"**/*.@(ts|tsx)\""
+  },
+  "devDependencies": {
+    "@types/bs58": "4.0.1",
+    "@typescript-eslint/eslint-plugin": "^4.31.2",
+    "@typescript-eslint/parser": "^4.31.2",
+    "eslint": "^7.32.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "eslint-plugin-unused-imports": "^1.1.5",
+    "prettier": "2.6.2",
+    "typescript": "4.7.3"
+  },
+  "dependencies": {
+    "@solana/spl-token": "0.2.0",
+    "@solana/web3.js": "1.43.6",
+    "@solana/buffer-layout": "4.0.0",
+    "bn.js": "5.2.1"
+  }
+}
