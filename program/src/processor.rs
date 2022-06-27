@@ -106,7 +106,6 @@ impl Processor {
         auction_info.exhibitor_ft_receiving_pubkey = *exhibitor_ft_receiving_account.key;
         auction_info.price = initial_price;
         auction_info.end_at = clock.unix_timestamp.add(auction_duration_sec as i64);
-        auction_info.highest_bidder_pubkey = *exhibitor_account.key;
         Auction::pack(auction_info, &mut escrow_account.try_borrow_mut_data()?)?;
 
         // 'PDA' is an account specific to this program
@@ -251,7 +250,7 @@ impl Processor {
             ],
         )?;
 
-        if auction_info.exhibitor_pubkey != auction_info.highest_bidder_pubkey {
+        if auction_info.highest_bidder_pubkey != Pubkey::default(){
             // Since the highest bidder has changed, we will return the FT that the highest bidder has deposited so far.
             let transfer_to_previous_bidder_ix = spl_token::instruction::transfer(
                 token_program.key,
@@ -316,7 +315,7 @@ impl Processor {
         }
 
         // Prevents cancellation if someone has already bid
-        if auction_info.highest_bidder_pubkey != *exhibitor_account.key {
+        if auction_info.highest_bidder_pubkey != Pubkey::default() {
             return Err(AuctionError::AlreadyBid.into());
         }
 

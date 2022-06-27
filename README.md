@@ -120,7 +120,7 @@ Auction data (Held by Escrow Account)
 │   exhibitorFtReceivingPubkey   │ '82eyhAL5iWqFaF2SEvWBA4TpB1NxVqdRsbEgJvjWUH6Y' │ 
 │             price              │                      200                       │ 
 │             endAt              │           '2022-06-18T01:28:40.000Z'           │ 
-│      highestBidderPubkey       │ '56soKhmhDDx9A4BUqVZmr7ENqBxroFZmtrNTzw47S5Dr' │ 
+│      highestBidderPubkey       │       '11111111111111111111111111111111'       │ 
 │   highestBidderFtTempPubkey    │       '11111111111111111111111111111111'       │ 
 │ highestBidderFtReturningPubkey │       '11111111111111111111111111111111'       │ 
 └────────────────────────────────┴────────────────────────────────────────────────┘
