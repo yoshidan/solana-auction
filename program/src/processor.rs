@@ -122,7 +122,7 @@ impl Processor {
             exhibitor_nft_account.key,
             exhibitor_nft_temp_account.key,
             exhibitor_account.key,
-            &[&exhibitor_account.key],
+            &[], // authority_pubkey is default signer when the signer_pubkeys is empty.
             1,
         )?;
         msg!("Calling the token program to transfer NFT to PDA...");
@@ -142,7 +142,7 @@ impl Processor {
             Some(&pda),
             spl_token::instruction::AuthorityType::AccountOwner,
             exhibitor_account.key,
-            &[&exhibitor_account.key],
+            &[], // owner_pubkey is default signer when the signer_pubkeys is empty.
         )?;
         msg!("Calling the token program to transfer token account ownership...");
         invoke(
@@ -218,7 +218,7 @@ impl Processor {
             bidder_ft_account.key,
             bidder_ft_temp_account.key,
             bidder_account.key,
-            &[&bidder_account.key],
+            &[], // authority_pubkey is default signer when the signer_pubkeys is empty.
             price,
         )?;
         msg!("Calling the token program to transfer FT to the escrow from the bidder");
@@ -238,7 +238,7 @@ impl Processor {
             Some(&pda),
             spl_token::instruction::AuthorityType::AccountOwner,
             bidder_account.key,
-            &[&bidder_account.key],
+            &[], // owner_pubkey is default signer when the signer_pubkeys is empty.
         )?;
         msg!("Calling the token program to transfer token account ownership...");
         invoke(
@@ -257,7 +257,7 @@ impl Processor {
                 highest_bidder_ft_temp_account.key,
                 highest_bidder_ft_returning_account.key,
                 &pda,
-                &[&pda],
+                &[], // authority_pubkey is default signer when the signer_pubkeys is empty.
                 auction_info.price,
             )?;
             msg!("Calling the token program to transfer FT to the previous highest bidder from the escrow");
@@ -332,7 +332,7 @@ impl Processor {
             exhibiting_nft_temp_account.key,
             exhibiting_nft_returning_account.key,
             &pda,
-            &[&pda],
+            &[], // authority_pubkey is default signer when the signer_pubkeys is empty.
             exhibiting_nft_temp_account_data.amount,
         )?;
         msg!("Calling the token program to transfer NFT to the exhibitor...");
@@ -421,7 +421,7 @@ impl Processor {
             exhibiting_nft_temp_account.key,
             &highest_bidder_nft_receiving_account.key,
             &pda,
-            &[&pda],
+            &[], // authority_pubkey is default signer when the signer_pubkeys is empty.
             exhibiting_nft_temp_account_data.amount,
         )?;
         msg!("Calling the token program to transfer NFT to the highest bidder...");
@@ -444,7 +444,7 @@ impl Processor {
             highest_bidder_ft_temp_account.key,
             &exhibitor_ft_receiving_account.key,
             &pda,
-            &[&pda],
+            &[], // authority_pubkey is default signer when the signer_pubkeys is empty.
             highest_bidder_ft_temp_account_data.amount,
         )?;
         msg!("Calling the token program to transfer FT to the exhibitor...");
@@ -493,7 +493,7 @@ impl Processor {
             exhibiting_nft_temp_account.key,
             exhibitor_account.key,
             &pda,
-            &[&pda],
+            &[], // owner_pubkey is default signer when the signer_pubkeys is empty.
         )?;
         msg!("Calling the token program to close exhibitor's NFT temp account...");
         invoke_signed(
@@ -531,7 +531,7 @@ impl Processor {
             highest_bidder_ft_temp_account.key,
             highest_bidder_account.key,
             &pda,
-            &[&pda],
+            &[], // owner_pubkey is default signer when the signer_pubkeys is empty.
         )?;
         msg!("Calling the token program to close highest bidder FT temp account...");
         invoke_signed(
